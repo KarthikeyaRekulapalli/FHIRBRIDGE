@@ -1,0 +1,103 @@
+/* FHIR EHR Bridge. Light blue / white, Calibri or Times New Roman, minimal accent colours.
+   Type scale: page title 24px, section headings 18px, body 15px, annotations >= 11px. */
+:root {
+  --ink: #1b2a3a;
+  --ink-soft: #4a5a6a;
+  --ink-faint: #7a8894;
+  --page: #eaf3fb;      /* light blue */
+  --card: #ffffff;
+  --blue: #1f5f99;      /* single accent */
+  --blue-soft: #d6e7f5;
+  --line: #c9dbea;
+  --warn: #8a5a00;
+  --warn-bg: #fff6e0;
+  --error: #9b1c1c;
+  --error-bg: #fdecec;
+  --ok: #1e6b3a;
+  --ok-bg: #e8f5ec;
+  --font: Calibri, "Times New Roman", Times, Georgia, serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: var(--font); font-size: 15px; line-height: 1.5; color: var(--ink); background: var(--page); }
+h1 { font-size: 24px; font-weight: 700; margin: 0; }
+h2 { font-size: 18px; font-weight: 700; margin: 0 0 8px; }
+h3 { font-size: 15px; font-weight: 700; margin: 0 0 6px; color: var(--ink-soft); }
+p { margin: 0 0 10px; }
+ul { margin: 0 0 8px 18px; padding: 0; }
+
+.topbar { display: flex; align-items: baseline; gap: 16px; padding: 14px 24px; background: var(--card); border-bottom: 2px solid var(--blue); }
+.topbar .tag { font-size: 13px; color: var(--ink-soft); }
+.topbar .status { margin-left: auto; font-size: 13px; color: var(--ink-soft); }
+.topbar a.status { margin-left: 0; }
+.wrap { max-width: 1100px; margin: 0 auto; padding: 20px 24px 60px; }
+
+.panel, .cluster, .srccard, .narrative, #review { background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
+.panel { padding: 18px 20px; margin-bottom: 16px; }
+.panel .sub { color: var(--ink-soft); font-size: 14px; }
+.fields { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.field { display: flex; flex-direction: column; gap: 4px; }
+.field label, .sources .lbl { font-size: 13px; font-weight: 700; color: var(--ink-soft); }
+input, select { font: inherit; padding: 7px 9px; border: 1px solid var(--line); border-radius: 4px; background: #fff; color: var(--ink); }
+input:focus, select:focus { outline: 2px solid var(--blue-soft); border-color: var(--blue); }
+.row { display: flex; align-items: center; gap: 12px; margin-top: 14px; flex-wrap: wrap; }
+.sources { display: flex; gap: 14px; align-items: center; font-size: 14px; }
+.sources label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.muted { color: var(--ink-faint); font-size: 13px; }
+
+.btn { font: inherit; font-weight: 700; cursor: pointer; border: 1px solid var(--blue); border-radius: 4px; padding: 8px 18px; background: var(--blue); color: #fff; }
+.btn:hover { background: #184b7a; }
+.btn:disabled { opacity: .45; cursor: default; }
+.btn.ghost { background: #fff; color: var(--blue); }
+.btn.ghost:hover { background: var(--blue-soft); }
+
+.statusbar { padding: 10px 14px; margin: 0 0 12px; border-radius: 4px; border: 1px solid var(--line); font-size: 14px; background: var(--card); }
+.statusbar.working { border-color: var(--blue); color: var(--blue); }
+.statusbar.done { background: var(--ok-bg); color: var(--ok); border-color: #b9dcc4; }
+.statusbar.error { background: var(--error-bg); color: var(--error); border-color: #efb9b9; }
+.banner { display: flex; gap: 10px; align-items: flex-start; padding: 10px 14px; border-radius: 4px; margin-bottom: 8px; font-size: 14px; }
+.banner.error { background: var(--error-bg); color: var(--error); border: 1px solid #efb9b9; }
+.banner.warn { background: var(--warn-bg); color: var(--warn); border: 1px solid #f0d9a8; }
+.banner .x { margin-left: auto; border: none; background: none; color: inherit; font-size: 16px; cursor: pointer; }
+
+#results { margin-top: 20px; }
+.cluster { margin-bottom: 14px; overflow: hidden; }
+.cluster-head { display: flex; align-items: center; gap: 12px; padding: 10px 16px; background: var(--blue-soft); border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+.cluster-head .name { font-weight: 700; }
+.cluster-head .meta { color: var(--ink-soft); font-size: 14px; }
+.flag { margin-left: auto; font-size: 13px; color: var(--ink-faint); }
+.flag.candidate { color: var(--blue); font-weight: 700; }
+.evidence { padding: 8px 16px; font-size: 14px; border-bottom: 1px solid var(--line); }
+.conflict { color: var(--error); font-size: 14px; }
+.ok { color: var(--ok); }
+.member { display: flex; align-items: center; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--line); cursor: pointer; }
+.member:last-child { border-bottom: none; }
+.member input { width: 16px; height: 16px; }
+.member .who { display: flex; flex-direction: column; min-width: 0; }
+.member .full { font-weight: 700; }
+.member .demo { font-size: 14px; color: var(--ink-soft); }
+.member .id, .srccard .id { font-size: 12px; color: var(--ink-faint); }
+.member .score { margin-left: auto; font-size: 13px; color: var(--ink-soft); white-space: nowrap; }
+.badge { font-size: 12px; font-weight: 700; padding: 2px 7px; border-radius: 3px; border: 1px solid var(--blue); color: var(--blue); background: #fff; white-space: nowrap; }
+.badge.athena { border-style: dashed; }
+.actions { position: sticky; bottom: 0; display: flex; align-items: center; gap: 12px; padding: 12px 16px; background: var(--card); border: 1px solid var(--line); border-radius: 6px; }
+.actions .selinfo { font-size: 14px; color: var(--ink-soft); margin-right: auto; }
+
+#review { padding: 16px 20px; margin-top: 16px; border-left: 4px solid var(--warn); }
+#output { margin-top: 20px; }
+.narrative { padding: 16px 20px; border-left: 4px solid var(--blue); margin-bottom: 16px; }
+.narrative .meta { font-size: 13px; color: var(--ink-soft); margin-bottom: 10px; }
+.narrative .text { white-space: pre-wrap; }
+.disclaimer { margin-top: 12px; font-size: 13px; color: var(--warn); background: var(--warn-bg); padding: 8px 10px; border-radius: 4px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.srccard > header { display: flex; gap: 10px; align-items: baseline; padding: 10px 16px; background: var(--blue-soft); border-bottom: 1px solid var(--line); }
+.srccard .full { font-weight: 700; }
+.srccard .section { padding: 10px 16px; border-bottom: 1px solid var(--line); }
+.srccard .section:last-child { border-bottom: none; }
+.srccard li { font-size: 14px; }
+.srccard .conflict, .srccard .muted { padding: 8px 16px; }
+
+@media (max-width: 820px) {
+  .fields, .cols { grid-template-columns: 1fr; }
+  .wrap { padding: 16px; }
+}

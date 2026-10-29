@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FHIR EHR Bridge</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>FHIR EHR Bridge</h1>
+    <span class="tag">Cerner and athenahealth patient match and summary</span>
+    <span class="status" id="status">connecting&hellip;</span>
+    <a class="status" id="signout" href="/auth/logout" hidden>Sign out</a>
+  </header>
+
+  <main class="wrap">
+    <section class="panel" id="searchPanel" hidden>
+      <h2>Find a patient</h2>
+      <p class="sub">Enter at least one of first name, last name or date of birth. Results are ranked against your search and grouped when the same person may appear in both EHRs.</p>
+      <div class="fields">
+        <div class="field"><label for="given">First name</label><input id="given" type="text" autocomplete="off" maxlength="100" /></div>
+        <div class="field"><label for="family">Last name</label><input id="family" type="text" autocomplete="off" maxlength="100" /></div>
+        <div class="field"><label for="dob">Date of birth</label><input id="dob" type="date" /></div>
+        <div class="field"><label for="gender">Gender</label>
+          <select id="gender"><option value="">Any</option><option value="male">Male</option><option value="female">Female</option><option value="other">Other</option><option value="unknown">Unknown</option></select>
+        </div>
+      </div>
+      <div class="row">
+        <span class="sources" id="sources"></span>
+        <button class="btn" id="searchBtn" style="margin-left:auto">Search</button>
+      </div>
+    </section>
+
+    <div class="statusbar" id="statusbar" hidden></div>
+    <div id="errbar"></div>
+
+    <section id="results"></section>
+    <section id="review" hidden></section>
+    <section id="output"></section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

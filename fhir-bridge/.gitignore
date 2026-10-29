@@ -1,0 +1,19 @@
+# secrets - never commit
+*.env*
+!.env.example
+*.pem
+backend/keys/*
+!backend/keys/README.md
+
+# runtime
+backend/logs/
+logs/
+backend/.venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# files moved out of the tree for review (see DECISIONS.md)
+.removed/

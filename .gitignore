@@ -1,0 +1,4 @@
+# runtime logs at the repo root (fhir-bridge/.gitignore covers the app itself)
+logs/
+# local editor/agent config
+.claude/

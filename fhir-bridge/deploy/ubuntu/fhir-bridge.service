@@ -1,0 +1,35 @@
+# systemd unit for the FHIR EHR Bridge (Ubuntu). Installed by deploy/ubuntu/install.sh.
+# Secrets come from /etc/fhir-bridge/.env (root:fhir-bridge, mode 640), never from this file.
+[Unit]
+Description=FHIR EHR Bridge (Cerner + athenahealth patient summary)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=fhir-bridge
+Group=fhir-bridge
+WorkingDirectory=/opt/fhir-bridge/backend
+EnvironmentFile=/etc/fhir-bridge/.env
+Environment=APP_ENV=production
+Environment=LOG_DIR=/var/log/fhir-bridge
+Environment=LOG_TO_CONSOLE=false
+ExecStart=/opt/fhir-bridge/backend/.venv/bin/python -m uvicorn app.main:app --host 127.0.0.1 --port 8000 --workers 1 --no-access-log
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+
+# Hardening
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/log/fhir-bridge
+ProtectKernelTunables=true
+ProtectControlGroups=true
+RestrictSUIDSGID=true
+LockPersonality=true
+UMask=0077
+
+[Install]
+WantedBy=multi-user.target
